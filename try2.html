@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Blooming Letter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f172a, #0b3a4a);
+            font-family: 'Playfair Display', serif;
+            overflow: hidden;
+        }
+
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background: #ffe0ec;
+            position: relative;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #3a0b1a;
+        }
+
+        .flower-wrap {
+            width: 420px;
+            height: 420px;
+            display: none;
+            place-items: center;
+            position: relative;
+            filter: drop-shadow(0 30px 40px rgba(3, 8, 20, 0.6));
+            animation: float 8s ease-in-out infinite;
+        }
+
+        svg {
+            display: block;
+            width: 100%;
+            height: 100%
+        }
+
+        .petal {
+            transform-origin: 50% 90%;
+        }
+
+        .petal-inner {
+            transform-origin: 50% 100%;
+        }
+
+        .p1 {
+            animation: petalOpen 1.6s cubic-bezier(.2, .9, .2, 1) forwards;
+        }
+
+        .p2 {
+            animation: petalOpen 1.8s cubic-bezier(.2, .9, .2, 1) 0.08s forwards;
+        }
+
+        .p3 {
+            animation: petalOpen 2s cubic-bezier(.2, .9, .2, 1) 0.16s forwards;
+        }
+
+        .p4 {
+            animation: petalOpen 2.1s cubic-bezier(.2, .9, .2, 1) 0.24s forwards;
+        }
+
+        .p5 {
+            animation: petalOpen 2.2s cubic-bezier(.2, .9, .2, 1) 0.32s forwards;
+        }
+
+        .p6 {
+            animation: petalOpen 2.3s cubic-bezier(.2, .9, .2, 1) 0.4s forwards;
+        }
+
+        @keyframes petalOpen {
+            0% {
+                transform: scale(0.26) rotate(0deg) translateY(40px);
+                opacity: 0
+            }
+
+            60% {
+                opacity: 1;
+                transform: scale(1.05) rotate(6deg) translateY(-6px)
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg) translateY(0)
+            }
+        }
+
+        .center {
+            transform-origin: center;
+            animation: centerPulse 3s ease-in-out 0.5s infinite alternate;
+        }
+
+        @keyframes centerPulse {
+            from {
+                transform: scale(0.98)
+            }
+
+            to {
+                transform: scale(1.04)
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-8px)
+            }
+
+            100% {
+                transform: translateY(0)
+            }
+        }
+
+        .message {
+            position: absolute;
+            text-align: center;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 700;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: fadeIn 2s ease forwards;
+            animation-delay: 2.5s;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="envelope" id="openBtn">Open</div>
+    <div class="flower-wrap" id="flower">
+        <svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid meet">
+            <defs>
+                <radialGradient id="petalGrad" cx="30%" cy="30%">
+                    <stop offset="0%" stop-color="#fff6d8" />
+                    <stop offset="45%" stop-color="#ffd6e0" />
+                    <stop offset="100%" stop-color="#ff9fb1" />
+                </radialGradient>
+                <radialGradient id="centerGrad" cx="50%" cy="40%">
+                    <stop offset="0%" stop-color="#fff7e6" />
+                    <stop offset="60%" stop-color="#ffe08a" />
+                    <stop offset="100%" stop-color="#ffb86b" />
+                </radialGradient>
+                <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="8" result="b" />
+                    <feMerge>
+                        <feMergeNode in="b" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+            </defs>
+            <g transform="translate(300,320)">
+                <g class="petal p1" transform="rotate(0)">
+                    <path class="petal-inner"
+                        d="M0,-20 C90,-40 130,40 36,140 C12,170 -12,170 -36,140 C-130,40 -90,-40 0,-20Z"
+                        fill="url(#petalGrad)" />
+                </g>
+                <g class="petal p2" transform="rotate(60)">
+                    <path class="petal-inner"
+                        d="M0,-20 C90,-40 130,40 36,140 C12,170 -12,170 -36,140 C-130,40 -90,-40 0,-20Z"
+                        fill="url(#petalGrad)" />
+                </g>
+                <g class="petal p3" transform="rotate(120)">
+                    <path class="petal-inner"
+                        d="M0,-20 C90,-40 130,40 36,140 C12,170 -12,170 -36,140 C-130,40 -90,-40 0,-20Z"
+                        fill="url(#petalGrad)" />
+                </g>
+                <g class="petal p4" transform="rotate(180)">
+                    <path class="petal-inner"
+                        d="M0,-20 C90,-40 130,40 36,140 C12,170 -12,170 -36,140 C-130,40 -90,-40 0,-20Z"
+                        fill="url(#petalGrad)" />
+                </g>
+                <g class="petal p5" transform="rotate(240)">
+                    <path class="petal-inner"
+                        d="M0,-20 C90,-40 130,40 36,140 C12,170 -12,170 -36,140 C-130,40 -90,-40 0,-20Z"
+                        fill="url(#petalGrad)" />
+                </g>
+                <g class="petal p6" transform="rotate(300)">
+                    <path class="petal-inner"
+                        d="M0,-20 C90,-40 130,40 36,140 C12,170 -12,170 -36,140 C-130,40 -90,-40 0,-20Z"
+                        fill="url(#petalGrad)" />
+                </g>
+                <circle class="center" cx="0" cy="0" r="52" fill="url(#centerGrad)" filter="url(#softGlow)" />
+            </g>
+        </svg>
+        <div class="message">Miss Akahoho, Have A Great Day!</div>
+    </div>
+    <script>
+        const btn = document.getElementById('openBtn');
+        const flower = document.getElementById('flower');
+        btn.addEventListener('click', () => {
+            btn.style.display = 'none';
+            flower.style.display = 'grid';
+        });
+    </script>
+</body>
+
+</html>
